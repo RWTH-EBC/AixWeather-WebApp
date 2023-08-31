@@ -1,0 +1,30 @@
+{% extends 'templateapp/_base.html' %} {% load static %}{% block content %}
+<main>
+  <div class="container" style="margin-top:80px; z-index:-1; opacity: 1;">
+    {% block head %}
+      <title>Privacy Policy</title>
+    {% endblock %}
+
+    {% block body %}
+      <br>
+      <div class="container">
+        <br>
+        <p class="heading">Privacy Policy:</p>
+        <p class="fliesstext">
+          <h1 style="color:red">Text !?!</h1>
+          <br />
+          Institute for Energy Efficient Buildings and Indoor Climate (EBC) <br>
+          E.ON Energy Research Center (E.ON ERC), RWTH Aachen <br><br>
+          Mathieustraße 10 <br>
+          D - 52074 Aachen <br><br>
+
+          Tel.: +49 241 80 49760 <br>
+          Fax: +49 241 80 49769 <br>
+          Email: <a href="mailto:webframework@eonerc.rwth-aachen.de">webframework@eonerc.rwth-aachen.de</a>
+        <br><br>
+      </div>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br>
+      {% endblock %}
+  </div>
+ </main>
+{% endblock %}

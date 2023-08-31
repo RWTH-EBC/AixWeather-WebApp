@@ -1,0 +1,45 @@
+
+
+{% extends 'templateapp/_base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<main>
+  <div class="container" style="margin-top:80px; z-index:-1; opacity: 1;">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="custom-tab" data-toggle="tab" href="#custom" role="tab" aria-controls="custom" aria-selected="true">Custom</a>
+      </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="try-tab" data-toggle="tab" href="#try" role="tab" aria-controls="try" aria-selected="false">TRY</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="custom" role="tabpanel" aria-labelledby="custom-tab">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Convert your custom data (.pkl, .csv) to simulation ready (.mos, .epw, or json).</h2>
+            <table>
+              {{ customForm.as_table }}
+              {{customForm.docfile}}
+            </table>
+            <button type="submit" name="custom">Convert</button>    
+          </form>
+      </div>
+      <div class="tab-pane fade" id="try" role="tabpanel" aria-labelledby="try-tab">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <h2>Convert your TRY to simulation ready (.mos, .epw, or json).</h2>
+          <table>
+            {{ tryForm.as_table }}
+            {{tryForm.docfile}}
+          </table>
+          <button type="submit" name="try">Convert</button>    
+        </form>
+      </div>
+    </div>
+    
+    
+  <div class="container" style="margin-top:80px; z-index:-1; opacity: 1;">
+</main>
+{% endblock %}

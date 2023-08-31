@@ -1,0 +1,72 @@
+stages:
+  - deploy
+  - review
+
+variables:
+  APP_NAME: weather-tool
+
+deploy:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: deploy
+  environment:
+    name: production
+    url: http://ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de/
+  only:
+    - master
+  script:
+    - mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H 22 ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de >> ~/.ssh/known_hosts
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- config:set "$APP_NAME" THE_USER="$THE_USER" THE_PASSWORD="$THE_PASSWORD"
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- nginx:set "$APP_NAME" proxy-read-timeout 300s
+    - git-push ssh://dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de:22/$APP_NAME
+    
+    
+
+review_app:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: review
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    url: http://$CI_ENVIRONMENT_SLUG.ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de/
+    on_stop: stop_review_app
+  only:
+    - branches
+  except:
+    - master
+  script:
+    - mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H -p 22 ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de >> ~/.ssh/known_hosts
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- apps:clone --ignore-existing --skip-deploy "$APP_NAME" "$CI_ENVIRONMENT_SLUG"
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- config:set "$CI_ENVIRONMENT_SLUG"  CI_SLUG="$CI_ENVIRONMENT_SLUG" THE_USER="$THE_USER" THE_PASSWORD="$THE_PASSWORD"
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- nginx:set "$CI_ENVIRONMENT_SLUG" proxy-read-timeout 300s
+    - git-push ssh://dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de:22/$CI_ENVIRONMENT_SLUG
+
+stop_review_app:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: review
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: review/$CI_COMMIT_REF_NAME
+    action: stop
+  when: manual
+  script:
+    - mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H -p 22 ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de >> ~/.ssh/known_hosts
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- --force apps:destroy "$CI_ENVIRONMENT_SLUG"
+
+force_rebuild_production:
+  image: ilyasemenov/gitlab-ci-git-push
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: production
+    url: http://ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de
+  only:
+    - master
+  when: manual
+  script:
+    - mkdir -p ~/.ssh && echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H 22 ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de >> ~/.ssh/known_hosts
+    - ssh -t dokku@ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de -- ps:rebuild $APP_NAME
