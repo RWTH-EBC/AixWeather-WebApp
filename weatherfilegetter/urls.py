@@ -20,5 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include("converter.urls")),
     re_path(r'^', include('templateapp.urls')),
-    re_path(r'^', include("utc_converter.urls")),
 ]

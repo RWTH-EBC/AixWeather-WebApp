@@ -12,28 +12,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-#import configparser
-
-# path_to_config = "settings_standard.ini"
-# EXTRA_PARAMETER={}
-
-# config = configparser.ConfigParser()
-# config.optionxform = str
-# config.read(path_to_config)
-# for each_section in config.sections():
-#     if each_section != "aedifion": continue
-#     for (each_key, each_val) in config.items(each_section):
-#         """set default variables"""
-#         if each_key in ["USER", "user", "UID", "uid"]:
-#             USER = each_val
-#         elif each_key in ["PASSWORD", "password", "pwd", "PWD"]:
-#             PASSWORD = each_val
-#         elif each_key in ["baseurl"]:
-#             BASEURL = each_val
-#         elif each_key in ["project_id"]:
-#             PROJECT_ID = each_val
-#         else:
-#             EXTRA_PARAMETER[each_key] = each_val
 
 USER = os.environ.get('THE_USER')
 PASSWORD = os.environ.get('THE_PASSWORD')
@@ -50,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z*#5jt3$rd0ch!8$p&3aebge*8*4obcx_l)nucebly2i9&c3q+' #Todo: secret!
+SECRET_KEY = 'z*#5jt3$rd0ch!8$p&3aebge*8*4obcx_l)nucebly2i9&c3q+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,7 +50,6 @@ INSTALLED_APPS = [
     'templateapp',
     'bootstrap_datepicker_plus',
     'fileprovider',
-    'utc_converter',
 ]
 
 MIDDLEWARE = [

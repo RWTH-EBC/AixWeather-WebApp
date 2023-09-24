@@ -1,10 +1,8 @@
-from django.urls import re_path
+from django.urls import path
 from . import views
 from converter import views as converterviews
 app_name = 'templateapp'
 urlpatterns = [
-    re_path(r'progressurl', views.progressurl, name='progressurl'),
-    re_path(r'about', views.about, name='about'),
-    re_path(r'contact', views.contact, name='contact'), 
-    re_path(r'result', views.result, name='result'),
-    re_path(r'privacypolicy', views.privacypolicy, name='privacypolicy'),]
+    path('about', views.about, name='about'),
+    path('contact', views.contact, name='contact'), 
+    path('privacypolicy', views.privacypolicy, name='privacypolicy'),]

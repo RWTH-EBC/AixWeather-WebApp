@@ -76,17 +76,18 @@ img.center {
 	margin: 0.8em auto;
 	max-width: 70%;
 }
+
 .nav-pills {
    margin-top: 6em ;
-   background-color: white;
-   color:black;
+   background-color: rgb(115, 15, 15);   color:black;
    max-width: 100%;
+
 }
 
 @media screen and (max-width: 1599px) {
     .nav-pills {
       margin-top: 4em ;
-      background-color: white;
+      background-color: rgb(115, 15, 15);
       color:black;
       max-width: 100%;
   }
@@ -96,30 +97,14 @@ img.center {
     .nav-pills {
       max-width: 100%;
       margin-top: 1em ;
-      background-color: white;
+      background-color: rgb(115, 15, 15);
       color:black;
   }
 }
 
-.nav-pills > li > a.active {
-    background-color: #de402e!important;
-    color: #FFFAFA!important;
-    font-weight: bold;
-}
-.nav-pills > li > a {
-    color: #000000!important;
-    font-weight: bold;
-    padding-top: 15px;
-    padding-bottom: 15px;
 
-}
-.nav-pills > li > a:hover {
-    background-color: #e6e6e6!important;
-}
 
-.nav-pills > li > a.active:hover {
-    background-color: #de402e!important;
-}
+
 
 .responsive{
     display: grid;

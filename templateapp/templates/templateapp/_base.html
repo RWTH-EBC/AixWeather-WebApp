@@ -17,35 +17,39 @@
   <meta http-equiv="x-ua-compatible" content="IE=edge">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  <link rel="icon" type="image/png" href="{% static 'Sun_box.png'%}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-
+ 
 
 </head>
 <body>
-  <div style="z-index: 1; left:100px; position:absolute; display: grid; grid-template-columns: 1fr 1fr ;">
+  <div style="z-index: 1; left:100px; position:absolute; display: grid; grid-template-columns: 1fr 1fr 1fr;">
     <div class="container_logo" >
-      <a href="{% url 'converter:main' %}">
-      <picture>
+      <a href="{% url 'converter:main' %}" style="position:relative; margin-top: auto;">
+        <picture>
           <source media="(min-width: 420px)" srcset="{% static 'erc.jpg' %}">
-          <img src="{% static 'erc.jpg' %}" alt="Flowers" style="width:auto;" class="center">
+          <img src="{% static 'erc.jpg' %}" alt="Flowers"  style="width:70%;"  class="center">
         </picture>
       </a>
     </div>
     <div class="container_logo">
+      <a>AixWeather</a>
+    </div>
+    <div class="container_logo">
        <a href="https://www.ebc.eonerc.rwth-aachen.de/"  target="_blank"  style="position:relative; margin-top: auto;">
-         <picture>
-        <source media="(min-width: 1600px)" srcset="{% static 'logo_eon_rwth.png' %}">
-        <source media="(min-width: 768px)" srcset="{% static 'logo_eon_rwth_mittel.png' %}">
-        <source media="(min-width: 420px)" srcset="{% static 'logo_eon_rwth_klein.png' %}">
-        <img src="{% static 'logo_eon_rwth_klein.png' %}" alt="Flowers" style="width:auto;">
-      </picture></a>
+        <picture>
+          <source media="(min-width: 1600px)" srcset="{% static 'logo_eon_rwth.png' %}">
+          <source media="(min-width: 768px)" srcset="{% static 'logo_eon_rwth_mittel.png' %}">
+          <source media="(min-width: 420px)" srcset="{% static 'logo_eon_rwth_klein.png' %}">
+          <img src="{% static 'logo_eon_rwth_klein.png' %}" alt="Flowers"  style="width:auto;">
+        </picture>
+    </a>
     </div>
   </div>
- <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
          <span class="navbar-toggler-icon"></span>
      </button>
@@ -54,9 +58,6 @@
              <li class="nav-item">
                  <a class="nav-link" href="{% url 'converter:main' %}">Main</a>
              </li>
-             <li class="nav-item">
-              <a class="nav-link" href="{% url 'utc_converter:main' %}">Converter</a>
-          </li>
              <li class="nav-item">
                  <a class="nav-link" href="{% url 'templateapp:about' %}">About</a>
              </li>
@@ -68,12 +69,16 @@
              </li>
          </ul>
      </div>
- </nav>
-{% block content %} {% endblock %}
+  </nav>
+  {% block content %} {% endblock %}
 </body>
 <footer>
   <div class="container" style="text-align:right; max-width: 95%;">
-    <a href="https://git-ce.rwth-aachen.de/ebc/ebc-general/python/ebc-weather-tool" target="_blank" style="color:white"> Learn about the API :-) </a>
+    <a href="https://github.com/RWTH-EBC/AixWeather" target="_blank" style="color:white"> AixWeather functional git repository </a>
+    &nbsp
+    &nbsp
+    &nbsp
+    <a href="https://github.com/RWTH-EBC/AixWeather-WebApp/tree/main" target="_blank" style="color:white"> AixWeather-WebApp git repository </a>
   </div>
 </footer>
 {% block page_js %}{% endblock page_js %}
