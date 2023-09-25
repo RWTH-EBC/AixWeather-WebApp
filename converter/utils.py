@@ -27,7 +27,7 @@ def handle_uploaded_file(f):
             destination.write(chunk)
     return path
 
-
+#ToDo @Martin : Check if You want to change pipy(The page requires a base64 to render on the webpage)
 def plot_heatmap_missing_values_daily(df):
     # Group by day and check for any missing values for each day
     missing_data = df.resample("D").apply(lambda x: x.isnull().any())
