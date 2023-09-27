@@ -18,6 +18,11 @@ For detailed information regarding input and output formats, functionalities, an
 
 If you have any questions, encounter issues, or wish to contribute to the AixWeather project, please visit our [GitHub repository](https://github.com/RWTH-EBC/AixWeather) for additional information.
 
+## License
+
+The weather tool is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD license.
+See [license](LICENSE).
+
 ## Curious for More?
 
 Visit our [Tool Overview](https://ebc-tools.eonerc.rwth-aachen.de/) to discover even more freely available tools.
