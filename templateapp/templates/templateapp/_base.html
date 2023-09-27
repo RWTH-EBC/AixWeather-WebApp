@@ -26,17 +26,14 @@
 
 </head>
 <body>
-  <div style="z-index: 1; left:100px; position:absolute; display: grid; grid-template-columns: 1fr 1fr 1fr;">
+  <div style="z-index: 1; left:100px; position:absolute; display: grid; grid-template-columns: 1fr 1fr ;">
     <div class="container_logo" >
       <a href="{% url 'converter:main' %}" style="position:relative; margin-top: auto;">
         <picture>
-          <source media="(min-width: 420px)" srcset="{% static 'erc.jpg' %}">
-          <img src="{% static 'erc.jpg' %}" alt="Flowers"  style="width:70%;"  class="center">
+          <source media="(min-width: 420px)" srcset="{% static 'AixWeather_Logo.png' %}">
+          <img src="{% static 'AixWeather_Logo.png' %}" alt="Flowers"  class="center"  style="width: 300px; height: 120px;">
         </picture>
       </a>
-    </div>
-    <div class="container_logo">
-      <a>AixWeather</a>
     </div>
     <div class="container_logo">
        <a href="https://www.ebc.eonerc.rwth-aachen.de/"  target="_blank"  style="position:relative; margin-top: auto;">
