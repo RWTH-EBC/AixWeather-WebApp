@@ -8,7 +8,11 @@
 
 **[Access the running website](TODO)**
 
-Welcome to the AixWeather Web App! This web application is designed to seamlessly integrate with the [AixWeather functional core repository](https://github.com/RWTH-EBC/AixWeather). For detailed information regarding input and output formats, functionalities, and the methodology behind this web app, please consult the ReadMe of the [AixWeather GitHub repository](https://github.com/RWTH-EBC/AixWeather).
+Welcome to the AixWeather Web App! This web application is designed to seamlessly integrate functionalities of the AixWeather repository. 
+For detailed information regarding input and output formats, functionalities, and the methodology behind this web app, please consult the AixWeather repository. 
+
+[AixWeather GitHub repository](https://github.com/RWTH-EBC/AixWeather).
+
 
 ## Questions or Issues
 
