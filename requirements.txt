@@ -1,8 +1,10 @@
 Django
 pykml
+AixWeather
 django-bootstrap-datepicker-plus
 django-bootstrap4==2.3.1
 dj_database_url==0.5.0
+django-fileprovider
 gunicorn
 whitenoise
 django-crispy-forms
