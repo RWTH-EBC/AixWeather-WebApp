@@ -1,3 +1,9 @@
+![E.ON EBC RWTH Aachen University](./docs/EBC_Logo.png)
+
+<div align="center">
+  <img src="./docs/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
+</div>
+
 # AixWeather Web App
 
 **[Access the running website](TODO)**
