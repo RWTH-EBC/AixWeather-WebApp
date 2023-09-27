@@ -1,13 +1,11 @@
-Django==3.2.8
+Django
 pykml
-django-bootstrap-datepicker-plus==3.0.5
+django-bootstrap-datepicker-plus
 django-bootstrap4==2.3.1
 dj_database_url==0.5.0
 gunicorn
 whitenoise
 django-crispy-forms
-django_heroku
-django-fileprovider
 geopy
 pvlib
 pyproj

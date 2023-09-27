@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'converter',
     'templateapp',
     'bootstrap_datepicker_plus',
-    'fileprovider',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'fileprovider.middleware.FileProviderMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 
 ]
@@ -88,7 +86,7 @@ WSGI_APPLICATION = 'weatherfilegetter.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-"""
+
 import dj_database_url
 # to facilitate on dokku environment | by resgef
 if os.environ.get('DATABASE_URL', ''):
@@ -103,16 +101,7 @@ else:
         }
     }
 
-"""
-DATABASES = {   
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'EBC_weathertool',
-        'USER': 'postgres',
-        'PASSWORD': 'Anthem2018',
-        'HOST': 'localhost',
-    }
-}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
