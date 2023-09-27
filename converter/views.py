@@ -14,9 +14,9 @@ from pathlib import Path
 
 def index_view(request):
     if request.method == 'POST':
-
+        # the form data is processed and send to the download function depending on which form was used
         if "forecast" in request.POST or "forecast_quality_check" in request.POST:
-            # forecast
+            # dwd weather forecast data
             quality_check   =   False
             forecast_form   =   ForecastForm(request.POST)
             station_id      =   forecast_form['station_id'].value()
@@ -37,8 +37,8 @@ def index_view(request):
             if "historical_quality_check" in request.POST:
                 quality_check=True
             response = download_historical(request,starttime, endtime, station_id, data_type,quality_check)
-
         elif "try" in request.POST or "try_quality_check" in request.POST:
+            # dwd test reference year data 
             quality_check   =   False
             try_form        =   TRYForm(request.POST)
             data_type       =   try_form['output_format'].value()
@@ -48,6 +48,7 @@ def index_view(request):
             response=download_try(request,path,data_type,quality_check)
 
         elif "epw" in request.POST or "epw_quality_check" in request.POST:
+            #Energy plus Weather data
             quality_check   =   False
             epw_form    =   EPWForm(request.POST)
             data_type   =   epw_form['output_format'].value()
@@ -57,6 +58,7 @@ def index_view(request):
             response    =   download_epw(request,path,data_type,quality_check)
 
         elif "erc" in request.POST or "erc_quality_check" in request.POST:
+            #E.ON Research Center Weather Station Aachen data
             quality_check   =   False
             erc_form    =   ERCForm(request.POST)
             startdate   =   erc_form['start_date'].value()
@@ -69,6 +71,7 @@ def index_view(request):
             response=download_erc(request,starttime,endtime,(config.username,config.password),data_type,quality_check)
         return response     
     else:
+        #Render initial forms
         historical_form = HistoricalForm()
         forecast_form   = ForecastForm()
         try_form        = TRYForm()
@@ -89,13 +92,15 @@ def index_view(request):
 def download_historical(request, start, stop, station, type, quality_check):
 
     '''
-    function to download data depending on user's sepcifications
+    function to download historical data depending on user's sepcifications
 
         Parameters:
-            start:       (datetime obj)    data start
-            stop:        (datetime obj)    data stop
-            station:     (string/int)      station id
-            type:        (string/int)      type of output weatherfile
+            start:              (datetime obj)    data start
+            stop:               (datetime obj)    data stop
+            station:            (string/int)      station id
+            type:               (string/int)      type of output weatherfile
+            quality_check:      (boolean)         if quality_check or download should be performed
+
         Return:
             weatherfile
     '''
@@ -114,10 +119,12 @@ def download_historical(request, start, stop, station, type, quality_check):
 
 def download_forecast(request, station, type, quality_check):
     '''
-    function to download data depending on user's sepcifications
+    function to download forecast data depending on user's sepcifications
         Parameters:
-            station:     (string/int)      station id
-            type:        (string)          type of data
+            station:            (string/int)      station id
+            type:               (string)          type of data
+            quality_check:      (boolean)         if quality_check or download should be performed
+
         Return:
             forecast data
     '''
@@ -136,10 +143,11 @@ def download_forecast(request, station, type, quality_check):
 
 def download_try(rquest, path, type, quality_check):
     '''
-    function to download data depending on user's sepcifications
+    function to download refrence year data depending on user's sepcifications
         Parameters:
-            path:        (path)            path to try.dat file
-            type:        (string)          type of output weatherfile
+            path:               (path)            path to try.dat file
+            type:               (string)          type of output weatherfile
+            quality_check:      (boolean)         if quality_check or download should be performed
         Return:
             weatherfile
     '''
@@ -156,10 +164,12 @@ def download_try(rquest, path, type, quality_check):
 
 def download_epw(request, path, type, quality_check):
     '''
-    function to download data depending on user's sepcifications
+    function to download Energy plus Weather data depending on user's sepcifications
         Parameters:
-            path:        (path)            path to .epw file
-            type:        (string)          type of output weatherfile
+            path:               (path)            path to .epw file
+            type:               (string)          type of output weatherfile
+            quality_check:      (boolean)         if quality_check or download should be performed
+
         Return:
             weatherfile
     '''
@@ -176,13 +186,15 @@ def download_epw(request, path, type, quality_check):
 
 def download_erc(request, start, stop, cred, type, quality_check):
     '''
-    function to download data depending on user's sepcifications
+    function to download E.ON Research Center Weather data depending on user's sepcifications
 
         Parameters:
-            start:       (datetime obj)    data start
-            stop:        (datetime obj)    data stop
-            cred:        (tuple)           ERC credentials
-            type:        (string/int)      type of output weatherfile
+            start:              (datetime obj)    data start
+            stop:               (datetime obj)    data stop
+            cred:               (tuple)           ERC credentials
+            type:               (string/int)      type of output weatherfile
+            quality_check:      (boolean)         if quality_check or download should be performed
+
         Return:
             weatherfile
     '''
@@ -198,7 +210,7 @@ def download_erc(request, start, stop, cred, type, quality_check):
         return handle_output(DWD_data,type)
 
 
-
+# Function to prepare and return zip file containing the corresponding data
 def handle_output(DWD_data,type):
     DWD_data.import_data()
     DWD_data.data_2_core_data()
@@ -221,7 +233,7 @@ def handle_output(DWD_data,type):
     shutil.rmtree(path, ignore_errors=True)
     return response
 
-
+# Function to rend quality_heck graph
 def quality_check_function(request,DWD_data):
 
     DWD_data.import_data()

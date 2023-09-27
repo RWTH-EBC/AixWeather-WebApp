@@ -7,7 +7,7 @@ import os
 
 
 fs = FileSystemStorage()
-
+# Function to handle data upload
 def handle_uploaded_file(f):
     '''
     Import file and return the path to file, at the same time delete older file
@@ -27,7 +27,7 @@ def handle_uploaded_file(f):
             destination.write(chunk)
     return path
 
-
+#Function plotly to rend graph to html supported format
 def render_graph (plt):
 
     buf = BytesIO()
