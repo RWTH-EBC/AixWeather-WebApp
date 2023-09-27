@@ -6,89 +6,91 @@
 {% block content %}
 {# Display a form #}
 <main>
-    <h1>Download a weatherfile for your simulations.</h1>
-    <div class="wrapper" style="margin-top:80px;  opacity: 1;">  
-        <div class="sidebar">   
-            <h2> Select your input format</h2>   
-            <ul  class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" >
-                    <a class="nav-link active" id="historical-tab" data-toggle="tab" href="#historical" role="tab" aria-controls="historical" aria-selected="true">DWD-Historical (Open Data Pull)</a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link" id="forecast-tab" data-toggle="tab" href="#forecast" role="tab" aria-controls="forecast" aria-selected="false">DWD-Forecast (Open Data Pull)</a>
-                </li>
-                <li class="nav-item" >
-                    <a class="nav-link" id="TRY-tab" data-toggle="tab" href="#TRY" role="tab" aria-controls="TRY" aria-selected="false">DWD-Test Reference Year (Upload)</a>
-                </li>
-                <li  class="nav-item">
-                    <a class="nav-link" id="EPW-tab" data-toggle="tab" href="#EPW" role="tab" aria-controls="EPW" aria-selected="false">Energy Plus Weather File (Upload)</a>
-                </li>
-                <li  class="nav-item">
-                    <a class="nav-link" id="Aachen-tab" data-toggle="tab" href="#Aachen" role="tab" aria-controls="Aachen" aria-selected="false">E.ON Research Center Weather Station Aachen (Data Pull)</a>
-                </li>
+ 
+        <h1>Download a weatherfile for your simulations.</h1>
+        <div class="wrapper" style="margin-top:80px;  opacity: 1;left:100px;">  
+            <div class="sidebar">   
+                <h2> Select your input format</h2>   
+                <ul  class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" >
+                        <a class="nav-link active" id="historical-tab" data-toggle="tab" href="#historical" role="tab" aria-controls="historical" aria-selected="true">DWD-Historical (Open Data Pull)</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" id="forecast-tab" data-toggle="tab" href="#forecast" role="tab" aria-controls="forecast" aria-selected="false">DWD-Forecast (Open Data Pull)</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" id="TRY-tab" data-toggle="tab" href="#TRY" role="tab" aria-controls="TRY" aria-selected="false">DWD-Test Reference Year (Upload)</a>
+                    </li>
+                    <li  class="nav-item">
+                        <a class="nav-link" id="EPW-tab" data-toggle="tab" href="#EPW" role="tab" aria-controls="EPW" aria-selected="false">Energy Plus Weather File (Upload)</a>
+                    </li>
+                    <li  class="nav-item">
+                        <a class="nav-link" id="Aachen-tab" data-toggle="tab" href="#Aachen" role="tab" aria-controls="Aachen" aria-selected="false">E.ON Research Center Weather Station Aachen (Data Pull)</a>
+                    </li>
 
-            </ul> 
-         
-        </div>
-        <div class="main_content">
-            <div class="info tab-content" >
-                <div  class="tab-pane fade show active" id="historical">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <p>
-                        {{historical_form.as_p}}
-                        {{historical_form.media}}
-                        </p>
-                        <button type="submit" name="historical" id="id_download">Download</button>
-                        <button type="submit" name="historical_quality_check" formtarget="_blank">Quality_check</button>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="forecast" role="tabpanel" aria-labelledby="forecast-tab">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <p>
-                        {{forecast_form.as_p}}
-                        {{forecast_form.media}}
-                        </p>
-                        <button type="submit" name="forecast" id="id_download">Download</button> 
-                        <button type="submit" name="forecast_quality_check" formtarget="_blank">Quality_check</button>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="TRY" role="tabpanel" aria-labelledby="TRY-tab">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <p>
-                        {{try_form.as_p}}
-                        {{try_form.media}}
-                        </p>
-                        <button type="submit" name="try" id="id_download">Download</button> 
-                        <button type="submit" name="try_quality_check" formtarget="_blank">Quality_check</button>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="EPW" role="tabpanel" aria-labelledby="EPW-tab">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <p>
-                        {{epw_form.as_p}}
-                        {{epw_form.media}}
-                        </p>
-                        <button type="submit" name="epw" id="id_download">Download</button> 
-                        <button type="submit" name="epw_quality_check" formtarget="_blank">Quality_check</button>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="Aachen" role="tabpanel" aria-labelledby="Aachen-tab">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <p>
-                        {{erc_form.as_p}}
-                        {{erc_form.media}}
-                        </p>
-                        <button type="submit" name="erc" id="id_download">Download</button> 
-                        <button type="submit" name="erc_quality_check" formtarget="_blank">Quality_check</button>
-                    </form>
+                </ul> 
+            
+            </div>
+            <div class="main_content">
+                <div class="info tab-content" >
+                    <div  class="tab-pane fade show active" id="historical">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{historical_form.as_p}}
+                            {{historical_form.media}}
+                            </p>
+                            <button type="submit" name="historical" id="id_download">Download</button>
+                            <button type="submit" name="historical_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="forecast" role="tabpanel" aria-labelledby="forecast-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{forecast_form.as_p}}
+                            {{forecast_form.media}}
+                            </p>
+                            <button type="submit" name="forecast" id="id_download">Download</button> 
+                            <button type="submit" name="forecast_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="TRY" role="tabpanel" aria-labelledby="TRY-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{try_form.as_p}}
+                            {{try_form.media}}
+                            </p>
+                            <button type="submit" name="try" id="id_download">Download</button> 
+                            <button type="submit" name="try_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="EPW" role="tabpanel" aria-labelledby="EPW-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{epw_form.as_p}}
+                            {{epw_form.media}}
+                            </p>
+                            <button type="submit" name="epw" id="id_download">Download</button> 
+                            <button type="submit" name="epw_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="Aachen" role="tabpanel" aria-labelledby="Aachen-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{erc_form.as_p}}
+                            {{erc_form.media}}
+                            </p>
+                            <button type="submit" name="erc" id="id_download">Download</button> 
+                            <button type="submit" name="erc_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
 </main>
 {% endblock content %}
