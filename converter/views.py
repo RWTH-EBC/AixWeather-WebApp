@@ -151,7 +151,7 @@ def download_try(rquest, path, type, quality_check):
         while os.path.exists("results\data%s\data%s" % (i, i)):
             i += 1
         os.makedirs("results\data%s\data%s" % (i, i))
-        DWD_data = project_class.ProjectClassTRY(path,abs_result_folder_path="results\data%s\data%s" % i % i)
+        DWD_data = project_class.ProjectClassTRY(path,abs_result_folder_path="results\data%s\data%s" % (i , i))
         return handle_output(DWD_data,type)  
 
 def download_epw(request, path, type, quality_check):
