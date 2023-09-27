@@ -6,7 +6,8 @@ from django.http import HttpResponse, JsonResponse
 from .forms import HistoricalForm, ForecastForm, TRYForm, EPWForm, ERCForm
 from aixweather import project_class
 import config
-from converter.utils import handle_uploaded_file, plot_heatmap_missing_values_daily
+from converter.utils import handle_uploaded_file,render_graph
+from aixweather.data_quality_checks import plot_heatmap_missing_values_daily
 import shutil
 from pathlib import Path
 # Create your views here.
@@ -225,7 +226,7 @@ def quality_check_function(request,DWD_data):
 
     DWD_data.import_data()
     DWD_data.data_2_core_data()
-    graph = plot_heatmap_missing_values_daily(DWD_data.core_data)
+    graph = render_graph(plot_heatmap_missing_values_daily(DWD_data.core_data))
 
     # Render the graph to the template
     return render(request, 'converter/quality_check.html', {'graph': graph})
