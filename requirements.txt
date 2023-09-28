@@ -7,3 +7,4 @@ gunicorn
 whitenoise
 django-crispy-forms
 future-fstrings
+markdown
