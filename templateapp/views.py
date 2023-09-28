@@ -12,6 +12,10 @@ def about(request):
     """
     f = open("README.md","r")
     f = f.read()
+
+    # Replace ".templateapp" with an empty string for the images to load correctly in the webapp
+    f = f.replace(".templateapp", "")
+
     html = markdown.markdown(f)
     context = {
         'html':html

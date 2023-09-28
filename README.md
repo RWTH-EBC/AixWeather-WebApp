@@ -1,7 +1,7 @@
-![E.ON EBC RWTH Aachen University](./static/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](.templateapp/static/EBC_Logo.png)
 
 <div align="center">
-  <img src="./static/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
+  <img src=".templateapp/static/AixWeather_Logo.png" alt="AixWeather Logo" width="50%">
 </div>
 
 # AixWeather Web App
