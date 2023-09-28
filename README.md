@@ -20,7 +20,7 @@ If you have any questions, encounter issues, or wish to contribute to the AixWea
 
 ## License
 
-The weather tool is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD license.
+The AixWeather Web App is released by RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate and is available under a 3-clause BSD license.
 See [license](LICENSE).
 
 ## Curious for More?
