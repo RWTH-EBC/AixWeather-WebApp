@@ -14,7 +14,7 @@ def about(request):
     f = f.read()
 
     # Replace ".templateapp" with an empty string for the images to load correctly in the webapp
-    f = f.replace("/templateapp", "")
+    f = f.replace("./templateapp", "")
 
     html = markdown.markdown(f)
     context = {
