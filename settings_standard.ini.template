@@ -1,5 +1,0 @@
-[aedifion]
-user=@@USER@@
-password=@@PASS@@
-project_id=11
-baseurl=https://api.ercebc.aedifion.io/v2/

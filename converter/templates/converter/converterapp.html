@@ -6,111 +6,91 @@
 {% block content %}
 {# Display a form #}
 <main>
-    <div class="container" style="margin-top:80px; z-index:-1; opacity: 1;">
-    <h1>Download a weatherfile for your simulations.</h1>
-    <div class="row">
-    <div class="col-md">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="historical-tab" data-toggle="tab" href="#historical" role="tab" aria-controls="historical" aria-selected="true">Historical</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="forecast-tab" data-toggle="tab" href="#forecast" role="tab" aria-controls="forecast" aria-selected="false">Forecast</a>
-            </li>
-        </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="historical" role="tabpanel" aria-labelledby="historical-tab">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <p>
-                    {{form.as_p}}
-                    {{form.media}}
-                    </p>
-                    <h5 id="id_epwwarning" style="color:red;" hidden>WARNING: OpenStudio might not recognize leapday from .epw file with multiple years, leading to missing data.</h5>
-                    <button type="submit" name="quality_check" id="id_quality_check" style=background-color:skyblue>Check Datapoint Heatmap</button> <button type="submit" name="download" id="id_download">Download</button> 
-                </form>
+ 
+        <h1 style="padding-top: 10px; margin-top: 100px;margin-left: 100px;">Download a weatherfile for your simulations.</h1>
+        <div class="wrapper" style="margin-top:80px;  opacity: 1;left:100px;">  
+            <div class="sidebar">   
+                <h2> Select your input format</h2>   
+                <ul  class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" >
+                        <a class="nav-link active" id="historical-tab" data-toggle="tab" href="#historical" role="tab" aria-controls="historical" aria-selected="true">DWD-Historical (Open Data Pull)</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" id="forecast-tab" data-toggle="tab" href="#forecast" role="tab" aria-controls="forecast" aria-selected="false">DWD-Forecast (Open Data Pull)</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" id="TRY-tab" data-toggle="tab" href="#TRY" role="tab" aria-controls="TRY" aria-selected="false">DWD-Test Reference Year (Upload)</a>
+                    </li>
+                    <li  class="nav-item">
+                        <a class="nav-link" id="EPW-tab" data-toggle="tab" href="#EPW" role="tab" aria-controls="EPW" aria-selected="false">Energy Plus Weather File (Upload)</a>
+                    </li>
+                    <li  class="nav-item">
+                        <a class="nav-link" id="Aachen-tab" data-toggle="tab" href="#Aachen" role="tab" aria-controls="Aachen" aria-selected="false">E.ON Research Center Weather Station Aachen (Data Pull)</a>
+                    </li>
+
+                </ul> 
+            
             </div>
-            <div class="tab-pane fade" id="forecast" role="tabpanel" aria-labelledby="forecast-tab">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <p>
-                    {{forecast_form.as_p}}
-                    {{forecast_form.media}}
-                    </p>
-                    <h5 id="id_epwwarning" style="color:red;" hidden>WARNING: OpenStudio might not recognize leapday from .epw file with multiple years, leading to missing data.</h5>
-                    <button type="submit" name="forecast" id="id_download">Download</button> 
-                </form>
+            <div class="main_content">
+                <div class="info tab-content" >
+                    <div  class="tab-pane fade show active" id="historical">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{historical_form.as_p}}
+                            {{historical_form.media}}
+                            </p>
+                            <button type="submit" name="historical" id="id_download">Download</button>
+                            <button type="submit" name="historical_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="forecast" role="tabpanel" aria-labelledby="forecast-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{forecast_form.as_p}}
+                            {{forecast_form.media}}
+                            </p>
+                            <button type="submit" name="forecast" id="id_download">Download</button> 
+                            <button type="submit" name="forecast_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="TRY" role="tabpanel" aria-labelledby="TRY-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{try_form.as_p}}
+                            {{try_form.media}}
+                            </p>
+                            <button type="submit" name="try" id="id_download">Download</button> 
+                            <button type="submit" name="try_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="EPW" role="tabpanel" aria-labelledby="EPW-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{epw_form.as_p}}
+                            {{epw_form.media}}
+                            </p>
+                            <button type="submit" name="epw" id="id_download">Download</button> 
+                            <button type="submit" name="epw_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="Aachen" role="tabpanel" aria-labelledby="Aachen-tab">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <p>
+                            {{erc_form.as_p}}
+                            {{erc_form.media}}
+                            </p>
+                            <button type="submit" name="erc" id="id_download">Download</button> 
+                            <button type="submit" name="erc_quality_check" formtarget="_blank">Quality_check</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-    </div>
-    <div class="col-md">
-      <img src="{% static 'fieldunits.png' %}" style="width:700px">
-      {% if allowed == "yes" %}
-        <img src='data:image/png;base64,{{ graph }}' style="width:700px">
-      {% endif %}
-    </div>
-    </div>
-    <br>
-    <h5 style="color:red;">It could take more than 2 minutes to process large data.</h5>
-    <p>Data Source: <a href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/">DWD</a></p>
-    </div>
-    
+        </div>
+
 </main>
 {% endblock content %}
-
-{% block page_js %}
-
-<script>
-    $(document).ready(function () { //function will wait for the page to fully load before executing
-        $("#id_startAtZero").parent().hide();
-        $("#id_comment1").parent().hide();
-        $("#id_comment2").parent().hide();
-        $('select[id=id_datatype]').on('change', function() { //specifying onchange function for input of type radio and name visibility
-            console.log("Change!")
-            if (this.value == "TMY3.MOS" || this.value == "DATAFRAME.PICKLE") { //if the new value is private
-                $("#id_comment1").parent().hide();
-                $("#id_comment2").parent().hide();
-                $("#id_epwwarning").prop('hidden', true);
-                console.log("Disabling");
-
-
-            }else{ //if the new value is anything else
-                    $("#id_comment1").parent().show();//would recommend readonly instead of disable for form integrity
-                    $("#id_comment2").parent().show();
-                    $("#id_epwwarning").prop('hidden', false);
-                    console.log("Enabling");
-                }
-            if (this.value == "TMY3.MOS") { //if the new value is private
-                $("#id_startAtZero").parent().show();
-                
-                console.log("Enabling startAtZero");
-            }else{ //if the new value is anything else
-                $("#id_startAtZero").parent().hide();
-                
-                console.log("Disabling startAtZero");
-                }
-        });
-    });
-
-    $(document).ready(function () { //function will wait for the page to fully load before executing
-
-        $('select[id=id_source]').on('change', function() { //specifying onchange function for input of type radio and name visibility
-            console.log("Change!")
-            if (this.value == "ERC") { //if the new value is private
-                $("#id_station_id").prop('disabled', true);//would recommend readonly instead of disable for form integrity
-                $("#id_station_id").prop('required', false);
-                console.log("Disabling");
-
-
-            }else{ //if the new value is anything else
-                    $("#id_station_id").prop('disabled', false);//would recommend readonly instead of disable for form integrity
-                    $("#id_station_id").prop('required', true);
-                    console.log("Enabling");
-                }
-        });
-    });
-    function checked() {
-        document.getElementById('id_download').style.display = "block";
-    }
-</script>
-{% endblock page_js %}
