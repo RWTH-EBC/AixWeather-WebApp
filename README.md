@@ -6,7 +6,7 @@
 
 # AixWeather Web App
 
-**[Access the running website](TODO)**
+**[Access the running website](https://aixweather.eonerc.rwth-aachen.de/)**
 
 Welcome to the AixWeather Web App! This web application is designed to seamlessly integrate functionalities of the AixWeather repository. 
 For detailed information regarding input and output formats, functionalities, and the methodology behind this web app, please consult the AixWeather repository. 
