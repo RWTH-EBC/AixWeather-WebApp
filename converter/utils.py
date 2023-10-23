@@ -53,7 +53,7 @@ def create_unique_result_folder():
             # If it doesn't exist, create the folder and return its path
             os.makedirs(result_path)
 
-            print(f"created the following results path: {result_path})
+            print(f"created the following results path: {result_path}")
             return result_path
         i += 1
 

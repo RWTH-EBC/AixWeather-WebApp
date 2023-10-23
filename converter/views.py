@@ -226,8 +226,6 @@ def run_aixweather(aixweather_project, type):
     with open(filename, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type='application/octet-stream')
         response['Content-Disposition'] = 'attatchment; filename=' + os.path.basename(filename)
-
-    print(f"Removed the follwing results folder: {path}")
     shutil.rmtree(path, ignore_errors=True)
 
     return response
