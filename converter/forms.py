@@ -4,11 +4,11 @@ from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 datatype = forms.ChoiceField(
     choices=(
-        ("DATAFRAME.PICKLE", "pandas.Dataframe (.pickle)"),
+        ("CSV", "CSV (.csv)"),
+        ("JSON", "JSON (.json)"),
         ("TMY3.MOS", "ReaderTMY3-Modelica (.mos)"),
         ("IWEC.EPW", "EnergyPlus (.epw)"),
-        ("JSON", "JSON (.json)"),
-        ("CSV", "CSV (.csv)"),
+        ("DATAFRAME.PICKLE", "pandas.Dataframe (.pickle)"),
     ),
     required=True,
 )
