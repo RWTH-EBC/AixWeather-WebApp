@@ -6,16 +6,14 @@ import shutil
 from pathlib import Path
 
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from .forms import HistoricalForm, ForecastForm, TRYForm, EPWForm, ERCForm
 from aixweather import project_class
 from aixweather.data_quality_checks import plot_heatmap_missing_values_daily
 
 from converter.utils import handle_uploaded_file, render_graph, create_unique_result_folder
 
-
 # Create your views here.
-
 def index_view(request):
     if request.method == 'POST':
         # the form data is processed and send to the download function depending on which form was used

@@ -1,8 +1,6 @@
 from django import forms
-from bootstrap_datepicker_plus.widgets import DatePickerInput
-import datetime
 from django.utils.safestring import mark_safe
-import pandas as pd
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 datatype = forms.ChoiceField(
     choices=(

@@ -1,10 +1,8 @@
-from django.core.files.storage import FileSystemStorage
-import matplotlib.pyplot as plt
-from io import BytesIO, StringIO
-import base64
-import seaborn as sns
 import os
-import aixweather
+from io import BytesIO
+import base64
+
+from django.core.files.storage import FileSystemStorage
 
 root_dir = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
 

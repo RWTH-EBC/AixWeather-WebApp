@@ -1,10 +1,7 @@
 from django.shortcuts import render
-from django.views.static import serve
-from django.template import RequestContext
-
-# Create your views here.
 import markdown
 
+# Create your views here.
 
 def about(request):
     """This is the index view
