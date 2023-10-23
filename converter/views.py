@@ -233,6 +233,7 @@ def download_erc(request, start, stop, cred, type, quality_check):
         return run_aixweather_download(aixweather_project, type)
 
 
+
 # Function to prepare and return zip file containing the corresponding data
 def run_aixweather_download(aixweather_project, type):
     """Runs aixweather and returns the zipped results"""
