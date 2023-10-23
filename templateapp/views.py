@@ -20,7 +20,6 @@ def about(request):
     context = {
         'html':html
     }
-    print(html)
     return render(request, 'templateapp/about.html', context)
     
 def contact(request):
