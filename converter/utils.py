@@ -4,9 +4,8 @@ import base64
 
 from django.core.files.storage import FileSystemStorage
 
+# create a singular root directory
 root_dir = os.path.realpath(os.path.join(os.path.dirname(__file__), ".."))
-
-fs = FileSystemStorage()
 
 
 # Function to handle data upload
@@ -30,8 +29,8 @@ def handle_uploaded_file(f):
     return path
 
 
-# Function plotly to rend graph to html supported format
 def render_graph(plt):
+    """Function plotly to render graph to html supported format"""
     buf = BytesIO()
     plt.savefig(buf, format="png")
     buf.seek(0)
@@ -41,6 +40,11 @@ def render_graph(plt):
 
 
 def create_unique_result_folder():
+    """
+    This function generates folder names in the format "data_i" (e.g., "data_0", "data_1") and makes sure that each
+    webapp run uses a unique result folder.
+    This function returns the folder path and creates the directory.
+    """
     folder_path = os.path.join(root_dir, "results")
 
     i = 0
