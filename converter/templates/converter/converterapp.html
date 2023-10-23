@@ -7,7 +7,7 @@
 {# Display a form #}
 <main>
  
-        <h1 style="padding-top: 10px; margin-top: 100px;margin-left: 100px;">Download a weatherfile for your simulations.</h1>
+        <h1 style="padding-top: 10px; margin-top: 100px;margin-left: 100px;">Create a weatherfile for your simulations.</h1>
         <div class="wrapper" style="margin-top:80px;  opacity: 1;margin-left:100px;">
             <div class="sidebar">   
                 <h2> Select your input format</h2>   
@@ -40,8 +40,8 @@
                             {{historical_form.as_p}}
                             {{historical_form.media}}
                             </p>
-                            <button type="submit" name="historical" id="id_download">Download</button>
-                            <button type="submit" name="historical_quality_check" formtarget="_blank">Quality_check</button>
+                            <button type="submit" name="historical" id="id_download">Download weather data</button>
+                            <button type="submit" name="historical_quality_check" formtarget="_blank">Plot data availability</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="forecast" role="tabpanel" aria-labelledby="forecast-tab">
@@ -51,8 +51,8 @@
                             {{forecast_form.as_p}}
                             {{forecast_form.media}}
                             </p>
-                            <button type="submit" name="forecast" id="id_download">Download</button> 
-                            <button type="submit" name="forecast_quality_check" formtarget="_blank">Quality_check</button>
+                            <button type="submit" name="forecast" id="id_download">Download weather data</button>
+                            <button type="submit" name="forecast_quality_check" formtarget="_blank">Plot data availability</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="TRY" role="tabpanel" aria-labelledby="TRY-tab">
@@ -62,8 +62,8 @@
                             {{try_form.as_p}}
                             {{try_form.media}}
                             </p>
-                            <button type="submit" name="try" id="id_download">Download</button> 
-                            <button type="submit" name="try_quality_check" formtarget="_blank">Quality_check</button>
+                            <button type="submit" name="try" id="id_download">Download weather data</button>
+                            <button type="submit" name="try_quality_check" formtarget="_blank">Plot data availability</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="EPW" role="tabpanel" aria-labelledby="EPW-tab">
@@ -73,8 +73,8 @@
                             {{epw_form.as_p}}
                             {{epw_form.media}}
                             </p>
-                            <button type="submit" name="epw" id="id_download">Download</button> 
-                            <button type="submit" name="epw_quality_check" formtarget="_blank">Quality_check</button>
+                            <button type="submit" name="epw" id="id_download">Download weather data</button>
+                            <button type="submit" name="epw_quality_check" formtarget="_blank">Plot data availability</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="Aachen" role="tabpanel" aria-labelledby="Aachen-tab">
@@ -84,8 +84,8 @@
                             {{erc_form.as_p}}
                             {{erc_form.media}}
                             </p>
-                            <button type="submit" name="erc" id="id_download">Download</button> 
-                            <button type="submit" name="erc_quality_check" formtarget="_blank">Quality_check</button>
+                            <button type="submit" name="erc" id="id_download">Download weather data</button>
+                            <button type="submit" name="erc_quality_check" formtarget="_blank">Plot data availability</button>
                         </form>
                     </div>
                 </div>
