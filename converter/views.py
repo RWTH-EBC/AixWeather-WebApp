@@ -1,15 +1,19 @@
 # -*- coding: future_fstrings -*-
 import os
 import datetime as dt
+import config
+import shutil
+from pathlib import Path
+
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .forms import HistoricalForm, ForecastForm, TRYForm, EPWForm, ERCForm
 from aixweather import project_class
-import config
-from converter.utils import handle_uploaded_file,render_graph
 from aixweather.data_quality_checks import plot_heatmap_missing_values_daily
-import shutil
-from pathlib import Path
+
+from converter.utils import handle_uploaded_file, render_graph, create_unique_result_folder
+
+
 # Create your views here.
 
 def index_view(request):
@@ -105,15 +109,12 @@ def download_historical(request, start, stop, station, type, quality_check):
             weatherfile
     '''
     if quality_check:
-        DWD_data = project_class.ProjectClassDWDHistorical(start,stop,station)
-        return quality_check_function(request,DWD_data=DWD_data)
+        aixweather_project = project_class.ProjectClassDWDHistorical(start,stop,station)
+        return run_aixweather_quality_check_function(request, aixweather_project=aixweather_project)
     else:
-        i = 0
-        while os.path.exists("results\data%s\data%s" % (i, i)):
-            i += 1
-        os.makedirs("results\data%s\data%s" % (i, i))
-        DWD_data = project_class.ProjectClassDWDHistorical(start,stop,station,abs_result_folder_path="results\data%s\data%s" % (i, i))
-        return handle_output(DWD_data,type)  
+        result_folder_path = create_unique_result_folder()
+        aixweather_project = project_class.ProjectClassDWDHistorical(start,stop,station,abs_result_folder_path=result_folder_path)
+        return run_aixweather(aixweather_project, type)
             
 
 
@@ -129,19 +130,16 @@ def download_forecast(request, station, type, quality_check):
             forecast data
     '''
     if quality_check:
-        DWD_data = project_class.ProjectClassDWDForecast(station)
-        return quality_check_function(request,DWD_data=DWD_data)
+        aixweather_project = project_class.ProjectClassDWDForecast(station)
+        return run_aixweather_quality_check_function(request, aixweather_project=aixweather_project)
     else:
-        i = 0
-        while os.path.exists("results\data%s\data%s" % (i, i)):
-            i += 1
-        os.makedirs("results\data%s\data%s" % (i, i))
-        DWD_data = project_class.ProjectClassDWDForecast(station,abs_result_folder_path="results\data%s\data%s" % (i, i))
-        return handle_output(DWD_data,type)
+        result_folder_path = create_unique_result_folder()
+        aixweather_project = project_class.ProjectClassDWDForecast(station,abs_result_folder_path=result_folder_path)
+        return run_aixweather(aixweather_project, type)
 
 
 
-def download_try(rquest, path, type, quality_check):
+def download_try(request, path, type, quality_check):
     '''
     function to download refrence year data depending on user's sepcifications
         Parameters:
@@ -152,15 +150,12 @@ def download_try(rquest, path, type, quality_check):
             weatherfile
     '''
     if quality_check:
-        DWD_data = project_class.ProjectClassTRY(path)
-        return quality_check_function(request,DWD_data=DWD_data)
+        aixweather_project = project_class.ProjectClassTRY(path)
+        return run_aixweather_quality_check_function(request, aixweather_project=aixweather_project)
     else:
-        i = 0
-        while os.path.exists("results\data%s\data%s" % (i, i)):
-            i += 1
-        os.makedirs("results\data%s\data%s" % (i, i))
-        DWD_data = project_class.ProjectClassTRY(path,abs_result_folder_path="results\data%s\data%s" % (i , i))
-        return handle_output(DWD_data,type)  
+        result_folder_path = create_unique_result_folder()
+        aixweather_project = project_class.ProjectClassTRY(path,abs_result_folder_path=result_folder_path)
+        return run_aixweather(aixweather_project, type)
 
 def download_epw(request, path, type, quality_check):
     '''
@@ -174,15 +169,12 @@ def download_epw(request, path, type, quality_check):
             weatherfile
     '''
     if quality_check:
-        DWD_data = project_class.ProjectClassEPW(path)
-        return quality_check_function(request,DWD_data=DWD_data)
+        aixweather_project = project_class.ProjectClassEPW(path)
+        return run_aixweather_quality_check_function(request, aixweather_project=aixweather_project)
     else:
-        i = 0
-        while os.path.exists("results\data%s\data%s" % (i, i)):
-            i += 1
-        os.makedirs("results\data%s\data%s" % (i, i))
-        DWD_data = project_class.ProjectClassEPW(path,abs_result_folder_path="results\data%s\data%s" % (i, i))
-        return handle_output(DWD_data,type)
+        result_folder_path = create_unique_result_folder()
+        aixweather_project = project_class.ProjectClassEPW(path,abs_result_folder_path=result_folder_path)
+        return run_aixweather(aixweather_project, type)
 
 def download_erc(request, start, stop, cred, type, quality_check):
     '''
@@ -199,46 +191,51 @@ def download_erc(request, start, stop, cred, type, quality_check):
             weatherfile
     '''
     if quality_check:
-        DWD_data = project_class.ProjectClassERC(start,stop,cred)
-        return quality_check_function(request,DWD_data=DWD_data)
+        aixweather_project = project_class.ProjectClassERC(start,stop,cred)
+        return run_aixweather_quality_check_function(request, aixweather_project=aixweather_project)
     else:
-        i = 0
-        while os.path.exists("results\data%s\data%s" % (i, i)):
-            i += 1
-        os.makedirs("results\data%s\data%s" % (i, i))
-        DWD_data = project_class.ProjectClassERC(start,stop,cred,abs_result_folder_path="results\data%s\data%s" % (i, i))
-        return handle_output(DWD_data,type)
+        result_folder_path = create_unique_result_folder()
+        aixweather_project = project_class.ProjectClassERC(start,stop,cred,abs_result_folder_path=result_folder_path)
+        return run_aixweather(aixweather_project, type)
+
 
 
 # Function to prepare and return zip file containing the corresponding data
-def handle_output(DWD_data,type):
-    DWD_data.import_data()
-    DWD_data.data_2_core_data()
+def run_aixweather(aixweather_project, type):
+
+    # import and convert weather data
+    aixweather_project.import_data()
+    aixweather_project.data_2_core_data()
+
+    # create respective output file
     if type == "IWEC.EPW":
-        DWD_data.core_2_epw()
+        aixweather_project.core_2_epw()
     elif type == "TMY3.MOS":
-        DWD_data.core_2_mos()
+        aixweather_project.core_2_mos()
     elif type == "DATAFRAME.PICKLE":
-        DWD_data.core_2_pickle()  
+        aixweather_project.core_2_pickle()
     elif type == "JSON":
-        DWD_data.core_2_json()
+        aixweather_project.core_2_json()
     else:
-        DWD_data.core_2_csv()
-    path=Path(DWD_data.abs_result_folder_path).parent
-    shutil.make_archive(os.path.join(path,'weatherdata'), 'zip', DWD_data.abs_result_folder_path)
+        aixweather_project.core_2_csv()
+
+    # return created result files as http response
+    path=Path(aixweather_project.abs_result_folder_path).parent
+    shutil.make_archive(os.path.join(path,'weatherdata'), 'zip', aixweather_project.abs_result_folder_path)
     filename=os.path.join(path,'weatherdata.zip')
     with open(filename, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type='application/octet-stream')
         response['Content-Disposition'] = 'attatchment; filename=' + os.path.basename(filename)
     shutil.rmtree(path, ignore_errors=True)
+
     return response
 
 # Function to rend quality_heck graph
-def quality_check_function(request,DWD_data):
+def run_aixweather_quality_check_function(request, aixweather_project):
 
-    DWD_data.import_data()
-    DWD_data.data_2_core_data()
-    graph = render_graph(plot_heatmap_missing_values_daily(DWD_data.core_data))
+    aixweather_project.import_data()
+    aixweather_project.data_2_core_data()
+    graph = render_graph(plot_heatmap_missing_values_daily(aixweather_project.core_data))
 
     # Render the graph to the template
     return render(request, 'converter/quality_check.html', {'graph': graph})
