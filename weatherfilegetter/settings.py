@@ -35,6 +35,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', u'.ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de']
 
+CSRF_TRUSTED_ORIGINS = ['https://aixweather.eonerc.rwth-aachen.de']
 
 # Application definition
 
