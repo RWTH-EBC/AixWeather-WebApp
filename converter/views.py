@@ -238,51 +238,59 @@ def download_erc(request, start, stop, cred, type, quality_check):
 def run_aixweather_download(aixweather_project, type):
     """Runs aixweather and returns the zipped results"""
 
-    # import and convert weather data
-    aixweather_project.import_data()
-    aixweather_project.data_2_core_data()
+    # use try to print errors to the webapp user
+    try:
+        # import and convert weather data
+        aixweather_project.import_data()
+        aixweather_project.data_2_core_data()
 
-    # create respective output file
-    if type == "IWEC.EPW":
-        aixweather_project.core_2_epw()
-    elif type == "TMY3.MOS":
-        aixweather_project.core_2_mos()
-    elif type == "DATAFRAME.PICKLE":
-        aixweather_project.core_2_pickle()
-    elif type == "JSON":
-        aixweather_project.core_2_json()
-    else:
-        aixweather_project.core_2_csv()
+        # create respective output file
+        if type == "IWEC.EPW":
+            aixweather_project.core_2_epw()
+        elif type == "TMY3.MOS":
+            aixweather_project.core_2_mos()
+        elif type == "DATAFRAME.PICKLE":
+            aixweather_project.core_2_pickle()
+        elif type == "JSON":
+            aixweather_project.core_2_json()
+        else:
+            aixweather_project.core_2_csv()
 
-    # return created result files as http response
-    path = Path(aixweather_project.abs_result_folder_path).parent
-    shutil.make_archive(
-        os.path.join(path, "weatherdata"),
-        "zip",
-        aixweather_project.abs_result_folder_path,
-    )
-    filename = os.path.join(path, "weatherdata.zip")
-    with open(filename, "rb") as fh:
-        response = HttpResponse(fh.read(), content_type="application/octet-stream")
-        response["Content-Disposition"] = "attachment; filename=" + os.path.basename(
-            filename
+        # return created result files as http response
+        path = Path(aixweather_project.abs_result_folder_path).parent
+        shutil.make_archive(
+            os.path.join(path, "weatherdata"),
+            "zip",
+            aixweather_project.abs_result_folder_path,
         )
-    shutil.rmtree(path, ignore_errors=True)
+        filename = os.path.join(path, "weatherdata.zip")
+        with open(filename, "rb") as fh:
+            response = HttpResponse(fh.read(), content_type="application/octet-stream")
+            response["Content-Disposition"] = "attachment; filename=" + os.path.basename(
+                filename
+            )
+        shutil.rmtree(path, ignore_errors=True)
 
-    return response
+        return response
+    except Exception as e:
+        return HttpResponse(f"Error message:\n{e}")
 
 
 def run_aixweather_quality_check_function(request, aixweather_project):
     """Runs aixweather and returns a rendered quality check plot"""
 
-    # import and convert weather data
-    aixweather_project.import_data()
-    aixweather_project.data_2_core_data()
+    # use try to print errors to the webapp user
+    try:
+        # import and convert weather data
+        aixweather_project.import_data()
+        aixweather_project.data_2_core_data()
 
-    # render plot
-    graph = render_graph(
-        plot_heatmap_missing_values_daily(aixweather_project.core_data)
-    )
+        # render plot
+        graph = render_graph(
+            plot_heatmap_missing_values_daily(aixweather_project.core_data)
+        )
 
-    # Render the graph to the template
-    return render(request, "converter/quality_check.html", {"graph": graph})
+        # Render the graph to the template
+        return render(request, "converter/quality_check.html", {"graph": graph})
+    except Exception as e:
+        return HttpResponse(f"Error message:\n{e}")
