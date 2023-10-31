@@ -24,9 +24,9 @@ class HistoricalForm(forms.Form):
         ),
     )
 
-    start_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
+    start_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
 
-    end_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
+    end_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
     output_format = datatype
 
     def clean(self):
@@ -60,8 +60,8 @@ class EPWForm(forms.Form):
 
 
 class ERCForm(forms.Form):
-    start_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
-    end_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
+    start_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
+    end_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
     output_format = datatype
 
     def clean(self):
