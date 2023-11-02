@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import HistoricalForm, ForecastForm, TRYForm, EPWForm, ERCForm
 from aixweather import project_class
-from aixweather.data_quality_checks import plot_heatmap_missing_values_daily
+from aixweather.data_quality_checks import plot_heatmap_missing_values
 
 from converter.utils import (
     handle_uploaded_file,
@@ -287,7 +287,7 @@ def run_aixweather_quality_check_function(request, aixweather_project):
 
         # render plot
         graph = render_graph(
-            plot_heatmap_missing_values_daily(aixweather_project.core_data)
+            plot_heatmap_missing_values(aixweather_project.core_data)
         )
 
         # Render the graph to the template
