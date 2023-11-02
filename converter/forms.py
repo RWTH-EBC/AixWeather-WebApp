@@ -20,13 +20,13 @@ class HistoricalForm(forms.Form):
         required=False,
         initial="15000",
         label=mark_safe(
-            'Station ID (<a href="https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/air_temperature/historical/TU_Stundenwerte_Beschreibung_Stationen.txt" target="_blank">ID List</a>)'
+            'Station ID (<a href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/statliste/statlex_rich.txt;jsessionid=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102" target="_blank">ID List</a>)'
         ),
     )
 
-    start_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
+    start_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
 
-    end_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
+    end_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
     output_format = datatype
 
     def clean(self):
@@ -60,8 +60,8 @@ class EPWForm(forms.Form):
 
 
 class ERCForm(forms.Form):
-    start_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
-    end_date = forms.DateField(widget=DatePickerInput(format="%Y-%m-%d"))
+    start_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
+    end_date = forms.DateField(widget=DatePickerInput(options={"format": "YYYY-MM-DD"}))
     output_format = datatype
 
     def clean(self):

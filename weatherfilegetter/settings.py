@@ -31,10 +31,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'z*#5jt3$rd0ch!8$p&3aebge*8*4obcx_l)nucebly2i9&c3q+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', u'.ebc-weather.ebc-team-nk.osc.eonerc.rwth-aachen.de']
 
+CSRF_TRUSTED_ORIGINS = ['https://aixweather.eonerc.rwth-aachen.de']
 
 # Application definition
 
