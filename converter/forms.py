@@ -20,7 +20,7 @@ class HistoricalForm(forms.Form):
         required=False,
         initial="15000",
         label=mark_safe(
-            'Station ID (<a href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/statliste/statlex_rich.txt;jsessionid=68E14BA255FE50BDC4AD9FF4F835895F.live31092?view=nasPublication&nn=16102" target="_blank">ID List</a>)'
+            'Station ID (<a href="https://www.dwd.de/DE/leistungen/klimadatendeutschland/stationsliste.html" target="_blank">ID List</a>)'
         ),
     )
 
