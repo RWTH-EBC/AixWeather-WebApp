@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED 1
 # Allows docker to cache installed dependencies between builds
 #COPY requirements.txt requirements.txt
 
-RUN pip install git+https://github.com/RWTH-EBC/AixWeather.git@29-package-version-problems
+RUN pip install git+https://github.com/RWTH-EBC/AixWeather.git@29-package-version-problems#egg=AixWeather[full]
 RUN pip install -r requirements.txt
 
 RUN mkdir /aixweather
