@@ -5,8 +5,11 @@
 FROM python:3.11
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
 # Allows docker to cache installed dependencies between builds
-COPY requirements.txt requirements.txt
+#COPY requirements.txt requirements.txt
+
+RUN pip install git+https://github.com/RWTH-EBC/AixWeather.git@29-package-version-problems
 RUN pip install -r requirements.txt
 
 RUN mkdir /aixweather
