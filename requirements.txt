@@ -1,4 +1,4 @@
-AixWeather
+AixWeather[full]
 Django==4.2.7
 django-bootstrap-datepicker-plus==5.0.4
 django-bootstrap4==23.2
