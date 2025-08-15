@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import markdown
 
+
 # Create your views here.
 
 def about(request):
@@ -26,3 +27,12 @@ def contact(request):
     """
     context = {}
     return render(request, "templateapp/contact.html", context)
+
+
+def impressum(request):
+    """This is the index view
+
+    Renders the index template with the BuildingForm.
+    """
+    context = {}
+    return render(request, "templateapp/impressum.html", context)
